@@ -1,0 +1,186 @@
+@font-face {
+  font-family: "Medeo Sans";
+  src: url("Fonts/fonts/MedeoSans/webfonts/MedeoSansVariable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  /* 1rem = 16px at the 1920px Figma reference width. */
+  font-size: calc(100vw / 120);
+  --orange: #fa4f1f;
+  --blue: #3373b7;
+  --paper: #fdf7eb;
+  --window-inset: 40px;
+  --motion-duration: 180ms;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  font-family: "Medeo Sans", sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+p, h1 { margin: 0; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 5px; }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 1920 / 1585;
+  overflow: clip;
+  background: var(--paper);
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero__intro {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  width: 59.125rem;
+  margin-inline: auto;
+  padding-top: 2.5rem;
+  color: white;
+  text-align: center;
+}
+
+.hero__brand { display: block; width: 14rem; height: 3.3125rem; }
+.hero__brand img { display: block; max-width: 100%; height: auto; }
+
+h1 {
+  width: 100%;
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: .9;
+  letter-spacing: -.04em;
+}
+
+.hero__subtitle {
+  white-space: nowrap;
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.telegram-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 1.25rem 2.5rem;
+  border-radius: 6.25rem;
+  background: var(--orange);
+  color: white;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition: background-color var(--motion-duration), color var(--motion-duration);
+}
+.telegram-button:hover { background: white; color: var(--orange); }
+
+/* A document-positioned viewport-sized anchor, deliberately not fixed/sticky. */
+.hero__first-viewport {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 100vh;
+  height: 100svh;
+  pointer-events: none;
+}
+
+.profile-card {
+  position: absolute;
+  left: var(--window-inset);
+  bottom: var(--window-inset);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 20rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  background: rgb(255 255 255 / 20%);
+  backdrop-filter: blur(1.25rem);
+  -webkit-backdrop-filter: blur(1.25rem);
+  color: var(--blue);
+  pointer-events: auto;
+}
+.profile-card__header { display: flex; align-items: center; gap: 1.5rem; }
+.profile-card__portrait {
+  position: relative;
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.profile-card__portrait img {
+  position: absolute;
+  left: -.5625rem;
+  top: -.375rem;
+  width: 4.875rem;
+  height: 6.5rem;
+  object-fit: cover;
+}
+.profile-card__info { display: flex; flex-direction: column; gap: .75rem; white-space: nowrap; }
+.profile-card__name { font-size: 1.125rem; font-weight: 500; line-height: 1.3; letter-spacing: -.04em; }
+.profile-card__role { font-size: 1rem; line-height: 1; letter-spacing: -.02em; }
+.profile-card__description { width: 15.875rem; font-size: 1.5rem; font-weight: 500; line-height: 1; letter-spacing: -.04em; }
+.profile-card__description span { color: var(--orange); }
+
+.navigation {
+  position: fixed;
+  z-index: 10;
+  bottom: var(--window-inset);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+.navigation a {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 6.25rem;
+  background: white;
+  color: var(--orange);
+  font-size: 1.125rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition: background-color var(--motion-duration), color var(--motion-duration);
+}
+.navigation a:hover { background: var(--orange); color: white; }
+
+/* Figma trims text to cap height: preserve its visual gaps and pill heights. */
+@supports (text-box-trim: trim-both) {
+  h1, .hero__subtitle, .telegram-button span,
+  .navigation span, .profile-card__name,
+  .profile-card__role, .profile-card__description {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  :root { --motion-duration: 0ms; }
+  .hero__image { will-change: auto; }
+}

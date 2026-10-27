@@ -13,7 +13,7 @@
   --blue: #3373b7;
   --paper: #fdf7eb;
   --window-inset: 40px;
-  --motion-duration: 500ms;
+  --motion-duration: 300ms;
 }
 
 * { box-sizing: border-box; }
